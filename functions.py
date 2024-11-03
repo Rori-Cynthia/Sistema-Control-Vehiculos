@@ -17,7 +17,12 @@ classes_name = {
 
 def create_car() -> None:
     cars = []
-    number_cars_created = int(input("¿Cuantos vehículos desea insertar?: "))
+
+    try:
+        number_cars_created = int(input("¿Cuantos vehículos desea insertar?: "))
+    except ValueError:
+        print("Ha ingresado un valor que no es un numero entero. Intentelo nuevamente")
+        return create_car()
 
     if number_cars_created <= 0:
         print("Ha elegido no crear vehiculos.")
@@ -41,7 +46,7 @@ def create_car() -> None:
                 cars.append(new_car)
             except ValueError:
                 print("Uno de los datos ingresados es invalido. Por favor, reingrese los datos")
-                create_car()
+                return create_car()
 
         print("\nImprimiendo por pantalla los Vehiculos:\n")
         for number_car, car_data in enumerate(cars, start=1):
