@@ -1,5 +1,6 @@
 from vehicle import Vehicle
 
+
 class Car(Vehicle):
     def __init__(self, brand: str, model: str, number_wheels: int, speed: int, displacement: int):
         super().__init__(brand, model, number_wheels)

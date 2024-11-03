@@ -1,5 +1,6 @@
 from car import Car
 
+
 class CargoCar(Car):
     def __init__(
         self,

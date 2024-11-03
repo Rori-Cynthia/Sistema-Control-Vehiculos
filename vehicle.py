@@ -1,15 +1,18 @@
-from exceptions import NotDigitError, FileError
 import csv
+from typing import Any
+
+from exceptions import FileError, NotDigitError
+
 
 class Vehicle:
-    vehicles = []
+    vehicles: list = []
 
-    def __init__(self, brand: str, model: str, number_wheels):
+    def __init__(self, brand: str, model: str, number_wheels: int):
         self._brand = brand
         self._model = model
         self._number_wheels = self.validate_numeric(number_wheels, "El número de ruedas")
 
-    def validate_numeric(self, value, parameter_with_pronoun: str):
+    def validate_numeric(self, value: Any, parameter_with_pronoun: str) -> int:
         if isinstance(value, int):
             if value < 0:
                 raise NotDigitError(parameter_with_pronoun)
@@ -21,7 +24,7 @@ class Vehicle:
             return value
         else:
             raise NotDigitError(parameter_with_pronoun)
-                
+
     @property
     def brand(self) -> str:
         return self._brand
@@ -43,25 +46,25 @@ class Vehicle:
         return self._number_wheels
 
     @number_wheels.setter
-    def number_wheels(self, new_number_wheels) -> None:
+    def number_wheels(self, new_number_wheels: int) -> None:
         self._number_wheels = self.validate_numeric(new_number_wheels, "El número de ruedas")
 
     @classmethod
-    def add_vehicle(cls, vehicle):
+    def add_vehicle(cls, vehicle: Any) -> None:
         cls.vehicles.append(vehicle)
 
     @classmethod
-    def save_data_csv(cls, name_file):
+    def save_data_csv(cls, name_file: str) -> None:
         try:
             with open(name_file, "w", encoding="utf-8", newline="") as file:
                 file_csv = csv.writer(file)
                 for item in cls.vehicles:
                     file_csv.writerow([item.__class__, item.__dict__])
-        except:
+        except Exception:
             raise FileError
 
     @staticmethod
-    def read_data_csv(name_file):
+    def read_data_csv(name_file: str) -> None:
         vehicles = []
         try:
             with open(name_file, "r", encoding="utf-8") as file:
@@ -74,11 +77,10 @@ class Vehicle:
             print(f"El archivo '{name_file}' no se encontró. Se creará uno nuevo.")
             with open(name_file, "w", encoding="utf-8") as file:
                 pass
-        except:
+        except Exception:
             raise FileError
 
         return vehicles
 
     def __str__(self) -> str:
-        return (
-            f"Marca: {self.brand}, modelo: {self.model}, {self.number_wheels} ruedas")
+        return f"Marca: {self.brand}, modelo: {self.model}, {self.number_wheels} ruedas"

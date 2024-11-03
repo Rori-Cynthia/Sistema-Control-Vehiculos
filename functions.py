@@ -6,13 +6,14 @@ from private_car import PrivateCar
 from vehicle import Vehicle
 
 classes_name = {
-        "Vehicle": "Vehiculo",
-        "Car": "Automovil",
-        "PrivateCar": "Vehiculo Particular",
-        "CargoCar": "Vehiculo de Carga",
-        "Bicycle": "Bicicleta",
-        "Motorcycle": "Motocicleta",         
-    }
+    "Vehicle": "Vehiculo",
+    "Car": "Automovil",
+    "PrivateCar": "Vehiculo Particular",
+    "CargoCar": "Vehiculo de Carga",
+    "Bicycle": "Bicicleta",
+    "Motorcycle": "Motocicleta",
+}
+
 
 def create_car() -> None:
     cars = []
@@ -51,7 +52,7 @@ def create_instances() -> None:
     private = PrivateCar("Ford", "Fiesta", 4, "180", "500", 5)
     cargo = CargoCar("Daft Trucks", "G 38", 10, 120, "1000", "20000")
     bicycle = Bicycle("Shimano", "MT Ranger", 2, "Carrera")
-    motorcycle = Motorcycle("BMW", "F800s", 2,"Deportiva", "2T", "Doble Viga", 21)
+    motorcycle = Motorcycle("BMW", "F800s", 2, "Deportiva", "2T", "Doble Viga", 21)
 
     instances_list = [private, cargo, bicycle, motorcycle]
 
@@ -61,8 +62,10 @@ def create_instances() -> None:
 
     print("\nRelación de instancia motocicleta con otras clases\n")
     for class_name in classes_name.keys():
-        print(f"Motocicleta es instancia de {classes_name[class_name].capitalize()}: "
-            f"{isinstance(motorcycle, globals()[class_name])}")
+        print(
+            f"Motocicleta es instancia de {classes_name[class_name].capitalize()}: "
+            f"{isinstance(motorcycle, globals()[class_name])}"
+        )
 
 
 def manage_data():
@@ -76,7 +79,7 @@ def manage_data():
 
     for instance in instances_list:
         Vehicle.add_vehicle(instance)
-    
+
     Vehicle.save_data_csv("vehicles.csv")
 
     """Reading data"""
@@ -85,9 +88,9 @@ def manage_data():
     classes_info = {class_name: [] for class_name in classes_name.keys()}
 
     for data in vehicles_data:
-        data_class_name = data[0].split('.')[-1].rstrip("'>").lstrip("'")
+        data_class_name = data[0].split(".")[-1].rstrip("'>").lstrip("'")
         data_info = data[1]
-        
+
         if data_class_name in classes_info:
             classes_info[data_class_name].append(data_info)
 
@@ -97,4 +100,3 @@ def manage_data():
             for info in info_list:
                 print(info)
             print()
-    

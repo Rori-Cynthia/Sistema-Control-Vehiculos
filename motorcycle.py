@@ -1,6 +1,7 @@
 from bicycle import Bicycle
 from bicycle_motorcycle_enum import BicycleType, EngineType, FrameType, validate_enum
 
+
 class Motorcycle(Bicycle):
     def __init__(
         self,
@@ -48,4 +49,3 @@ class Motorcycle(Bicycle):
             f"motor: {self.type_engine}, cuadro: {self.type_frame}, "
             f"Nro radios: {self.spoke_numbers}"
         )
-

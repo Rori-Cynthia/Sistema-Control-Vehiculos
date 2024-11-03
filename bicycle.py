@@ -1,6 +1,6 @@
-from vehicle import Vehicle
 from bicycle_motorcycle_enum import BicycleType
 from exceptions import InvalidTypeBicycleError
+from vehicle import Vehicle
 
 
 class Bicycle(Vehicle):
@@ -8,7 +8,7 @@ class Bicycle(Vehicle):
         super().__init__(brand, model, number_wheels)
         self._type_bicycle = self.validate_type_bicycle(type_bicycle)
 
-    def validate_type_bicycle(self, type_bicycle):
+    def validate_type_bicycle(self, type_bicycle: BicycleType) -> BicycleType:
         if type(self) is Bicycle and type_bicycle not in (BicycleType.URBAN, BicycleType.RACING):
             raise InvalidTypeBicycleError
         return type_bicycle
@@ -19,7 +19,7 @@ class Bicycle(Vehicle):
 
     @type_bicycle.setter
     def type_bicycle(self, new_type_bicycle: BicycleType) -> None:
-        self._type_bicycle = self.validate_type_bicicle(new_type_bicycle)
+        self._type_bicycle = self.validate_type_bycicle(new_type_bicycle)
 
     def __str__(self) -> str:
         return (
